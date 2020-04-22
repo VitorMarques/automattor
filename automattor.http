@@ -1,0 +1,17 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+GET https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyAlFqoY2EQhhGrcXZXWhhL_m0ebOkvExAk&query=Madureira&type=store&radius=10000&rankedby=distance&fields=place_id&pagetoken=
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6
+###
+
+GET https://places.cit.api.here.com/places/v1/browse?app_id=ZtyKaqErd27ZYVMqLRVp&app_code=uwPjgTVMAlwm41ZjEZjcZQ&in=-22.75909,-43.45425;r=2000&cat=eat-drink&size=20
+
+###
+GET https://places.cit.api.here.com/places/v1/places/0768lxx5-d65519b8c88e067bc948be406a2e1ebc;context=Zmxvdy1pZD01YTJlZTk1Ni0yM2EwLTU3YjItYTFmMS04NTcwM2FiMzhhMDVfMTU1NzQyODAyNjk3M180NDg1Xzk3MTYmcmFuaz0zNQ?app_id=ZtyKaqErd27ZYVMqLRVp&app_code=uwPjgTVMAlwm41ZjEZjcZQ
+
+###

@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: Automattor
+  data:
+    mongodb:
+      uri: ${mongoatlasdburl}
+  output:
+    ansi:
+      enabled: detect
+
+server:
+  port: 8080
+  servlet:
+    context-path: /automattor
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+    mime-types: application/json
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){magenta} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${spring.application.name:-}]){yellow} %clr(-){yellow} %clr(%-40.40logger{39}){cyan} %clr(:){teal} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    root: info
+    org.springframework.web: info
+    org.mongodb.driver: info
+  file: automattor.log
+---
+integrations:
+  here:
+    security:
+      api:
+        appid: ${appid}
+        appcode: ${appcode}
+    geocode:
+      baseurl: "https://geocoder.api.here.com"
+      path: "/6.2"
+      resource: "/geocode"
+      format: ".json"
+      fullurl: "${integrations.here.geocode.baseurl}${integrations.here.geocode.path}${integrations.here.geocode.resource}${integrations.here.geocode.format}?app_id=${integrations.here.security.api.appid}&app_code=${integrations.here.security.api.appcode}&searchtext=%s"
+    places:
+      baseurl: "https://places.api.here.com"
+      path: "/places/v1"
+      resource: "/browse"
+      pagesize: 200
+      fullurl: "${integrations.here.places.baseurl}${integrations.here.places.path}${integrations.here.places.resource}?app_id=${integrations.here.security.api.appid}&app_code=${integrations.here.security.api.appcode}&size=${integrations.here.places.pagesize}&in=%s;r=${integrations.here.places.search.radius}&cat=%s"
+      search:
+        radius: 3000
+---
+org:
+  quartz:
+    jobStore:
+      class: org.quartz.simpl.RAMJobStore
+      misfireThreshold: 60000
+    threadPool:
+      class: org.quartz.simpl.SimpleThreadPool
+      threadCount: 4
+      threadsInheritContextClassLoaderOfInitializingThread: true
+    trigger:
+      start:
+        year: 2019
+        month: MAY
+        day: 10
+        hour: 18
+        minute: 34
+      frequency: 86400000 #A DAY
+
+using:
+  spring:
+    schedulerFactory: true
+---
+company:
+  search:
+    load:
+      file: "D:\\workspaces\\automattor\\src\\main\\resources\\files\\neighborhood_RJ.txt"
